@@ -121,7 +121,7 @@ export class PlayaControlComponent implements OnInit {
         this.updateItem(this.componente, item);
         break;
       }
-      case 'Eliminar': {
+      case 'Salida': {
         this.deleteItem(this.componente, item);
         this.interOpService.addItem("facturacion", item)
         break;
@@ -194,7 +194,7 @@ export class PlayaControlComponent implements OnInit {
         break;
       }
 
-      case 'Eliminar': {
+      case 'Salida': {
         this.openTicket("Ticket Salida", item)
         break;
       }

@@ -109,6 +109,12 @@ componente: string = 'tarifas'
         break;
       }
  
+
+
+
+
+
+      
        default: {
         console.log("sin operacion en el case crud")
         break;

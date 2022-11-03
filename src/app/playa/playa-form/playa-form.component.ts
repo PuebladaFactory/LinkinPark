@@ -106,7 +106,7 @@ export class PlayaFormComponent implements OnInit {
         this.validarPatente() ;   
         break;
       }
-      case 'Eliminar': {  
+      case 'Salida': {  
         this.pruebaCierreHora();
         break;
       }
@@ -138,7 +138,7 @@ validarPatente(){
   let patenteValida = this.validacionPatente.validarPatente(this.editForm.value.patente);
 
   if(patenteValida){
-    alert("es una patente valida")
+  //  alert("es una patente valida")
     this.validarTarifa()
   }else{
     alert("no es una patente valida")

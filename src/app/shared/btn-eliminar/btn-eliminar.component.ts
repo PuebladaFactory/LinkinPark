@@ -4,9 +4,9 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-btn-eliminar',
 
   template: `
-<button class="btn btn-success" style="border-radius: 10%; margin: 10px ; ">
+<button class="btn btn-success" style="border-radius: 10%; margin: 10px ; width:87px ">
   <i class="fa fa-minus"> </i>
-  {{name || "Eliminar"}}
+  {{name || "Salida"}}
 </button>
   `,
 

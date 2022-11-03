@@ -54,7 +54,7 @@ export class DataService implements InMemoryDbService {
           categoria: "camioneta",            // tipo de vehiculo
           fraccion: 30,             // fraccion minima de facturacion
           unidad_tiempo: "min",        // minutos, horas, dias, semanas, mes
-          valor: 180,                
+          valor: 200,                
           tolerancia: 5,           // rango de tolerancia
         },
         
@@ -66,6 +66,60 @@ export class DataService implements InMemoryDbService {
           unidad_tiempo: "min",        // minutos, horas, dias, semanas, mes
           valor: 120,                
           tolerancia: 5,           // rango de tolerancia
+        },
+        {
+          id: 1,
+          nombre: "moto-mensual",               // nombre de la tarifa 
+          categoria: "moto",            // tipo de vehiculo
+          fraccion: 0,             // fraccion minima de facturacion
+          unidad_tiempo: "mes",        // minutos, horas, dias, semanas, mes
+          valor: 2500,                
+          tolerancia: 0,           // rango de tolerancia
+        },
+        {
+          id: 5,
+          nombre: "auto-5 horas",               // nombre de la tarifa 
+          categoria: "auto",            // tipo de vehiculo
+          fraccion: 0,             // fraccion minima de facturacion
+          unidad_tiempo: "horas",        // minutos, horas, dias, semanas, mes
+          valor: 600,                
+          tolerancia: 5,           // rango de tolerancia
+        },
+        {
+          id: 6,
+          nombre: "moto-5 horas",               // nombre de la tarifa 
+          categoria: "moto",            // tipo de vehiculo
+          fraccion: 0,             // fraccion minima de facturacion
+          unidad_tiempo: "horas",        // minutos, horas, dias, semanas, mes
+          valor: 480,                
+          tolerancia: 5,           // rango de tolerancia
+        },
+        {
+          id: 7,
+          nombre: "camioneta-5 horas",               // nombre de la tarifa 
+          categoria: "camioneta",            // tipo de vehiculo
+          fraccion: 0,             // fraccion minima de facturacion
+          unidad_tiempo: "min",        // minutos, horas, dias, semanas, mes
+          valor: 900,                
+          tolerancia: 5,           // rango de tolerancia
+        },
+        {
+        id: 8,
+          nombre: "camioneta-mensual",               // nombre de la tarifa 
+          categoria: "camioneta",            // tipo de vehiculo
+          fraccion: 0,             // fraccion minima de facturacion
+          unidad_tiempo: "min",        // minutos, horas, dias, semanas, mes
+          valor: 12500,                
+          tolerancia: 0,           // rango de tolerancia
+        },
+        {
+          id: 9,
+          nombre: "auto-mensual",               // nombre de la tarifa 
+          categoria: "auto",            // tipo de vehiculo
+          fraccion: 0,             // fraccion minima de facturacion
+          unidad_tiempo: "mes",        // minutos, horas, dias, semanas, mes
+          valor: 9600,                
+          tolerancia: 0,           // rango de tolerancia
         },
       ],
 
@@ -143,16 +197,89 @@ export class DataService implements InMemoryDbService {
           saldo: 0,
           codigoBarras: "ad123sa-14:24:23"
         },
+        {
+          id: 2,
+          patente: "ac143sa",
+          fechas: {
+            fechaDate: "Tue Oct 25 2022 17:09:31 GMT-0300 (hora estándar de Argentina)",
+            fechaIngreso: "25-10-2022",
+            horaIngreso: "14:22:23",
+            fechaSalidaDate: "",
+            fechaSalida: "",
+            horaSalida: "",   
+            estadia: 0,         
+          },
+          tarifa: {
+            id: 3,
+            nombre: "auto-basico",               // nombre de la tarifa 
+            categoria: "auto",            // tipo de vehiculo
+            fraccion: 30,             // fraccion minima de facturacion
+            unidad_tiempo: "min",        // minutos, horas, dias, semanas, mes
+            valor: 150,                
+            tolerancia: 5,           // rango de tolerancia
+          },
+          descripcion: "lambo rojo",
+          saldo: 0,
+          codigoBarras: "ac143sa-14:24:23"
+        },{
+          id: 3,
+          patente: "aa155sa",
+          fechas: {
+            fechaDate: "Tue Oct 25 2022 17:09:31 GMT-0300 (hora estándar de Argentina)",
+            fechaIngreso: "25-10-2022",
+            horaIngreso: "14:23:23",
+            fechaSalidaDate: "",
+            fechaSalida: "",
+            horaSalida: "",   
+            estadia: 0,         
+          },
+          tarifa: {
+            id: 4,
+            nombre: "auto-basico",               // nombre de la tarifa 
+            categoria: "auto",            // tipo de vehiculo
+            fraccion: 30,             // fraccion minima de facturacion
+            unidad_tiempo: "min",        // minutos, horas, dias, semanas, mes
+            valor: 150,                
+            tolerancia: 5,           // rango de tolerancia
+          },
+          descripcion: "Jeep renegade blanco",
+          saldo: 0,
+          codigoBarras: "aa155sa-14:24:23"
+        },{
+          id: 5,
+          patente: "af564mo",
+          fechas: {
+            fechaDate: "Tue Oct 25 2022 17:11:31 GMT-0300 (hora estándar de Argentina)",
+            fechaIngreso: "25-10-2022",
+            horaIngreso: "14:25:23",
+            fechaSalidaDate: "",
+            fechaSalida: "",
+            horaSalida: "",   
+            estadia: 0,         
+          },
+          tarifa: {
+            id: 3,
+            nombre: "auto-basico",               // nombre de la tarifa 
+            categoria: "auto",            // tipo de vehiculo
+            fraccion: 30,             // fraccion minima de facturacion
+            unidad_tiempo: "min",        // minutos, horas, dias, semanas, mes
+            valor: 150,                
+            tolerancia: 5,           // rango de tolerancia
+          },
+          descripcion: "cronos blanco",
+          saldo: 0,
+          codigoBarras: "af564mo-14:25:23"
+        },
       ], 
 
       facturacion: [
         {
-          id: 3,
-          patente: "AA123ZZ",
+          id: 6,
+          patente: "mvv756",
           fechas: {
             fechaDate: "Tue Oct 25 2022 17:09:31 GMT-0300 (hora estándar de Argentina)",
             fechaIngreso: "25-10-2022",
-            horaIngreso: "14:24:23",
+            horaIngreso: "14:26:23",
             fechaSalidaDate: "",
             fechaSalida: "xx-xx-xxxx",
             horaSalida: "yy:yy:yy",   
@@ -167,18 +294,18 @@ export class DataService implements InMemoryDbService {
             valor: 150,                
             tolerancia: 5,           // rango de tolerancia
           },
-          descripcion: "fitito rojo",
+          descripcion: "punto blanco",
           saldo: 1000,
-          codigoBarras: "AA123ZZ-25-10-2022-14:24:23"
+          codigoBarras: "mvv756-25-10-2022-14:24:23"
         },
 
         {
-          id: 4,
-          patente: "XX234XX",
+          id: 7,
+          patente: "gvs408",
           fechas: {
             fechaDate: "Tue Oct 25 2022 17:09:31 GMT-0300 (hora estándar de Argentina)",
             fechaIngreso: "25-10-2022",
-            horaIngreso: "14:24:23",
+            horaIngreso: "14:27:23",
             fechaSalidaDate: "",
             fechaSalida: "cc-cc-cccc",
             horaSalida: "zz-zz-zzzz",   
@@ -195,7 +322,7 @@ export class DataService implements InMemoryDbService {
           },
           descripcion: "fitito rojo",
           saldo: 1000,
-          codigoBarras: "XX234XX-25-10-2022-14:24:23"
+          codigoBarras: "gvs408-25-10-2022-14:24:23"
         },
       ],  
 

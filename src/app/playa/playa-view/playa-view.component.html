@@ -17,13 +17,12 @@
     </div>
   </li>
   <li>
-    <div style=" float: left;">
+    <div style=" float: left;" *ngIf="$estado | async">
       <app-btn-eliminar class="left" 
-      *ngIf="$estado" (click)="msgBack('Salida',[])" 
-      class="d-flex align-items-center "
-      name = 'Egreso'>
-       
-      </app-btn-eliminar>
+      name = 'Egreso'
+      *ngIf="$estado" id.patente (click)="msgBack('Salida',[])" 
+      class="d-flex align-items-center "    >
+            </app-btn-eliminar>
     </div>
   </li>
 </ul>
@@ -73,8 +72,8 @@
         <td>
           <app-btn-eliminar class="right" 
                             *ngIf="$estado" 
-                            (click)="msgBack('Eliminar',item)"
-                            name = 'Egreso'>
+                            (click)="msgBack('Salida',item)"
+                            name = 'Salida'>
           </app-btn-eliminar>
         </td>
         <td>

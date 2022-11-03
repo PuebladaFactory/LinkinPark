@@ -6,17 +6,17 @@
  
   
   <img class="img-1 me-2" src='https://i.ibb.co/kmYdw3H/Pueblada-Factory-2.png'
-    alt=""    height="80"  style='float: left; padding: 3px 3px 0px 3px;' />
-  
+    alt=""    height="100"  style='float: left; padding: 3px 3px 0px 3px;' />
+    <br>  
   <ng-container *ngIf="$estado | async ; then modoLoggedIn; else modoLoggedOut">
   </ng-container>
-</div>
 
+</div>
 
 <ng-template #modoLoggedIn>
   <div class="d-flex justify-content-end"> 
- <button class="btn btn-primary me-1">/</button>
-  <button class="btn btn-primary me-1" (click)="logOut()">Log-Out</button>
+ 
+  <button class="btn btn-dark me-1" (click)="logOut()">Log-Out </button>
     
   </div>
 </ng-template>
@@ -24,7 +24,7 @@
 <ng-template #modoLoggedOut>
 
   <div class="d-flex justify-content-end">
-    <button class="btn btn-primary me-2" (click)="openLoginForm()">Login</button>
+    <button class="btn btn-dark me-2" (click)="openLoginForm()">Login</button>
   </div>
 </ng-template>
 
