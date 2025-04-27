@@ -2,9 +2,37 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+////// AYACUCHO ///////////////////////////////////////////////////////////////////////////////////
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+export const environment = {
+  firebase: {
+    apiKey: "AIzaSyCd_t-uumyuRFUk5xFM14Iqxmplktoba20",
+    authDomain: "ayacucho-550.firebaseapp.com",
+    projectId: "ayacucho-550",
+    storageBucket: "ayacucho-550.firebasestorage.app",
+    messagingSenderId: "70874261780",
+    appId: "1:70874261780:web:097d2e055cc9f94e1f7a01",
+    measurementId: "G-49L6W8RCD9"
+},
+      production : false,
+      //production : true,
+    };
+  
+  // Initialize Firebase
+  const app = initializeApp(environment.firebase);
+  const analytics = getAnalytics(app);
+
 ////// DEMO ///////////////////////////////////////////////////////////////////////////////////
 // Dummypark para devel
-export const environment = {
+/*export const environment = {
   firebase: {
       apiKey: "AIzaSyDyrikGh_AIpTIoIhOaawgGOdk1YrQhSDw",
       authDomain: "dummy-park.firebaseapp.com",
@@ -15,7 +43,7 @@ export const environment = {
   },
   production: false,
   
-};
+}; */
 
 ///////////////////PLAYA SanLuisCba ////////////////////////////////////////////////////////////////////////
 // pfpark app database para prod

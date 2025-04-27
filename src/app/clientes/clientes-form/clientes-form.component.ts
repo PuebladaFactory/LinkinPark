@@ -71,7 +71,7 @@ export class ClientesFormComponent implements OnInit {
       apellido: ['', Validators.pattern(/^[ a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/)],
       nombre: ['', Validators.pattern(/^[ a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/)],
       telefono: ['', Validators.pattern(/^[0-9]{5,10}$/)],
-      direccion: [''],
+      direccion: [''], 
       comentario: [''],
       email: ['', [Validators.required, Validators.email]],
       id: [''],
@@ -112,7 +112,11 @@ export class ClientesFormComponent implements OnInit {
   get Apellido() {
     return this.editForm.get('apellido');
   }
-
+  // agregue metodo direccion
+  get Direccion() { 
+    return this.editForm.get('direccion');
+  }
+  
   getMsg(msg: any) {
     //console.log(msg, 'from vehiculos-form');
     /* let value = {

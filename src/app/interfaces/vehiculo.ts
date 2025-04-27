@@ -1,6 +1,7 @@
 import { Tarifas } from "./tarifas";
 
 export interface Vehiculo {
+  valor(arg0: string, valor: any): unknown;
   id: number;
   patente: string;
   marca: string;

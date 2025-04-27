@@ -1,9 +1,0 @@
-{
-  "projects": {
-    "dev": "dummy-park",
-    "prod": "pfparkapp",
-    "rivera": "rivera-cba"
-  },
-  "targets": {},
-  "etags": {}
-}

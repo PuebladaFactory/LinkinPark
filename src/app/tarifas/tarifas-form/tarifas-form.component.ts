@@ -133,6 +133,10 @@ export class TarifasFormComponent implements OnInit {
       categoria: this.item.categoria,
       tolerancia: this.item.tolerancia,
       id: this.item.id,
+      
+      
+      //console.log("tarifa abono guardado valor", this.item.tarifa.valor)
+      
     });
   }
 
@@ -170,6 +174,7 @@ export class TarifasFormComponent implements OnInit {
     //segun el camino que sea (agregar/editar/eliminar)
     //en este caso, agregar y editar hacen lo mismo
     //pero te lo dejo para que veas que son caminos distintos
+    console.log('valor fraccion', this.item.valor);
     switch (this.titulo) {
       case 'Agregar': {
         this.item = this.editForm.value; //guarda los valores del form en item
@@ -186,6 +191,7 @@ export class TarifasFormComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             this.closeModal(); //cierra el modal
+            console.log('valor fraccion', this.item.valor);
           }
         });
 
@@ -226,5 +232,6 @@ export class TarifasFormComponent implements OnInit {
 
     // console.log('closemodal', value);
     this.activeModal.close(value);
+    console.log('valor fraccion', this.item.valor);
   }
 }

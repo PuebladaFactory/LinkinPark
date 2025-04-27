@@ -6,7 +6,7 @@
 <ng-template #clientes>
   <div class="modal-header">
       <h1 class="modal-title" id="modal-basic-title"  *ngIf="!soloVista">{{titulo}} Clientes</h1>
-      <button type="button" class="close btn btn-primary" (click)="activeModal.dismiss('Cross click')">
+      <button type="button" class="close btn btn-primary" title="close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
   </div>
@@ -18,6 +18,7 @@
                 <label for="Apellido">Apellido</label>
                 <div class="input-group">
                   <input formControlName="apellido" class="form-control" required type="text"
+                  title="Apellido" placeholder="Apellido"
                   [ngClass]="{'is-invalid':Apellido?.errors && Apellido?.touched, 'is-valid': !Apellido?.errors && !Apellido?.touched }"
                   [ngClass]="{'isDisabled': soloVista}">
                 </div>
@@ -26,6 +27,7 @@
                 <label for="Nombre">Nombre</label>
                 <div class="input-group">
                   <input formControlName="nombre" class="form-control" required type="text"
+                  title="Nombre" placeholder="Nombre"
                   [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched, 'is-valid': !Nombre?.errors && !Nombre?.touched }"
                   [ngClass]="{'isDisabled': soloVista}">
                 </div>
@@ -35,6 +37,7 @@
                 <label for="Telefono">Telefono</label>
                 <div class="input-group">
                   <input formControlName="telefono" class="form-control"  type="text"
+                  title="Telefono" placeholder="Telefono"
                   [ngClass]="{'is-invalid':Telefono?.errors && Telefono?.touched, 'is-valid': !Telefono?.errors && !Telefono?.touched }"
                   [ngClass]="{'isDisabled': soloVista}">                  
                 </div>
@@ -44,6 +47,7 @@
                 <label for="Direccion">Direccion</label>
                 <div class="input-group">
                   <input formControlName="direccion" class="form-control"  type="text"
+                  title="Direccion" placeholder="Direccion"
                   [ngClass]="{'isDisabled': soloVista}">
                 </div>
               </div>
@@ -65,6 +69,7 @@
                 <label for="Comentario">Comentario</label>
                 <div class="input-group">
                   <input formControlName="comentario" class="form-control" type="text"
+                  title="Comentario" placeholder="Comentario"
                   [ngClass]="{'isDisabled': soloVista}">
                 </div>
               </div>
