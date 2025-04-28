@@ -3,7 +3,6 @@
     type="button"
     class="close btn btn-primary"
     (click)="activeModal.dismiss('Cross click')"
-    title="Close"
   >
     <span aria-hidden="true">&times;</span>
   </button>
@@ -20,8 +19,6 @@
           <input
             formControlName="concepto"
             class="form-control"
-            title="Concepto"
-            placeholder="Concepto"
             required
             type="text"
             [ngClass]="{

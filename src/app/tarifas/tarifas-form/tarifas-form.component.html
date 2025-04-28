@@ -1,6 +1,6 @@
 <div class="modal-header">
   <h1 class="modal-title" id="modal-basic-title" *ngIf="!soloVista">{{titulo}} Tarifas <Form></Form> </h1>
-  <button type="button" class="close btn btn-primary" (click)="activeModal.dismiss('Cross click')" title="Close Modal">
+  <button type="button" class="close btn btn-primary" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
 </button>
 </div>
@@ -11,7 +11,7 @@
           <div class="form-group">
             <label for="Nombre">Nombre</label>
             <div class="input-group">
-              <input formControlName="nombre" class="form-control" required type="text" [ngClass]="{'isDisabled': soloVista}" placeholder="Nombre de la tarifa">
+              <input formControlName="nombre" class="form-control" required type="text" [ngClass]="{'isDisabled': soloVista}">
             </div>
           </div>
          
@@ -20,7 +20,7 @@
             <!--<div class="input-group">
               <input formControlName="unidad_tiempo" class="form-control" required type="text"> -->
               <div>
-                <select class="form-select form-select-md mb-3" (change)="changeUnidadTiempo($event)"[ngClass]="{'isDisabled': soloVista}" title="unidad de tiempo">
+                <select class="form-select form-select-md mb-3" (change)="changeUnidadTiempo($event)"[ngClass]="{'isDisabled': soloVista}">
                   <option value={{unidadSeleccionada}} [ngClass]="{'isDisabled': soloVista}">Elegir unidad de tiempo</option>
                   <option *ngFor="let unidad of unidadTiempo" [ngClass]="{'isDisabled': soloVista}">
                     {{unidad.unidad_tiempo}}
@@ -32,7 +32,7 @@
           <div class="form-group">
             <label for="valor">valor de la fraccíon mínima</label>
             <div class="input-group">
-              <input formControlName="valor" class="form-control" required type="text" placeholder="Valor de la fracción mínima"
+              <input formControlName="valor" class="form-control" required type="text"
               [ngClass]="{'is-invalid':Valor?.errors && Valor?.touched, 'is-valid': !Valor?.errors && !Valor?.touched }"
               [ngClass]="{'isDisabled': soloVista}"> 
             </div>
@@ -41,7 +41,7 @@
           <div class="form-group">
             <label for="fraccion">fraccion mínima de tiempo</label>
             <div class="input-group">
-              <input formControlName="fraccion" class="form-control" required type="text" placeholder="Fracción mínima de tiempo"
+              <input formControlName="fraccion" class="form-control" required type="text"
               [ngClass]="{'is-invalid':Fraccion?.errors && Fraccion?.touched, 'is-valid': !Fraccion?.errors && !Fraccion?.touched }"
               [ngClass]="{'isDisabled': soloVista}"> 
             </div>
@@ -49,7 +49,7 @@
 
           <div>
             <label for="descuento">categoria de la tarifa</label>
-            <select class="form-select form-select-md mb-3" (change)="changeCategoria($event)" [ngClass]="{'isDisabled': soloVista}"title="categoria de la tarifa">
+            <select class="form-select form-select-md mb-3" (change)="changeCategoria($event)" [ngClass]="{'isDisabled': soloVista}">
               <option value={{categoriaSeleccionada}}>Elegir categoria</option>
               <option *ngFor="let categoria of categorias">
                 {{categoria.nombre}}
@@ -59,7 +59,7 @@
 
           <div>
             <label for="descuento">vehiculo</label>
-            <select class="form-select form-select-md mb-3" (change)="changeVehiculo($event)" [ngClass]="{'isDisabled': soloVista}" title="Seleccionar tipo de vehiculo">
+            <select class="form-select form-select-md mb-3" (change)="changeVehiculo($event)" [ngClass]="{'isDisabled': soloVista}">
               <option value={{vehiculoSeleccionado}}>Seleccionar tipo de vehiculo</option>
               <option *ngFor="let vehiculo of vehiculos">
                 {{vehiculo.nombre}}
@@ -70,7 +70,7 @@
           <div class="form-group">
             <label for="descuento">tolerancia</label>
             <div class="input-group">
-              <input formControlName="tolerancia" class="form-control" required type="text" placeholder="Tolerancia"
+              <input formControlName="tolerancia" class="form-control" required type="text"
               [ngClass]="{'is-invalid':Tolerancia?.errors && Tolerancia?.touched, 'is-valid': !Tolerancia?.errors && !Tolerancia?.touched }"
               [ngClass]="{'isDisabled': soloVista}"> 
             </div>

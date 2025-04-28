@@ -2,7 +2,7 @@
   <h1 class="modal-title" id="modal-basic-title">Apertura de Caja</h1>
 
   <!-- <div>Saldo de caja: {{saldo | currency:'ARS':'symbol-narrow' :'1.0-0'}} </div> -->
-  <button type="button" class="close btn btn-primary" title="Close" (click)="activeModal.dismiss('Cross click')">
+  <button type="button" class="close btn btn-primary" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -14,7 +14,6 @@
             <label for="Concepto">Concepto</label>
             <div class="input-group">
               <input formControlName="concepto" class="form-control" required type="text"
-              title="Concepto" placeholder="Concepto"
                 [ngClass]="{'is-invalid':Concepto?.errors && Concepto?.touched, 'is-valid': !Concepto?.errors && !Concepto?.touched }">
             </div>
           </div>
@@ -22,7 +21,6 @@
           <label for="Importe">Saldo Inicial de Caja</label>
           <div class="input-group">
             <input formControlName="importe" class="form-control" required type="text"
-              title="Ingrese el saldo inicial de caja" placeholder="Saldo inicial"
               [ngClass]="{'is-invalid':Importe?.errors && Importe?.touched, 'is-valid': !Importe?.errors && !Importe?.touched }">
           </div>
         </div>
