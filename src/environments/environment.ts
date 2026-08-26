@@ -2,7 +2,42 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-////// DEMO ///////////////////////////////////////////////////////////////////////////////////
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
+// RIVERA-CBA (proyecto de PRUEBA) //
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+export const environment = {
+  firebase: {
+    apiKey: "AIzaSyD81Ze6jBon9RyqHXavLWGHmUYFCOD_XX4",
+    authDomain: "rivera-cba.firebaseapp.com",
+    projectId: "rivera-cba",
+    storageBucket: "rivera-cba.firebasestorage.app",
+    messagingSenderId: "699739361796",
+    appId: "1:699739361796:web:510043b9de320da2699b51",
+    measurementId: "G-KC28CREFPY"
+  },
+  production: false,
+
+};
+
+// Initialize Firebase
+const app = initializeApp(environment.firebase);
+const analytics = getAnalytics(app);
+
+
+/*////// DEMO ///////////////////////////////////////////////////////////////////////////////////
 // Dummypark para devel
 export const environment = {
   firebase: {

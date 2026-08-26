@@ -1,5 +1,5 @@
 <div class="container">
-  <table datatable [dtOptions]="dtOptions" class="display table">
+  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="display table">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -10,7 +10,6 @@
         <th id="colBtn"></th>
       </tr>
     </thead>
-
     <tbody>
       <tr *ngFor="let item of data | async; let i = index">
         <th class="badge" scope="row">{{ i + 1 }}</th>
@@ -19,38 +18,39 @@
           {{ item.fechaOp.seconds * 1000 | date : "dd/MM/yyyy - hh:mmaaa" }}
         </td>
         <td class="align-middle tarifa">{{ item.tarifa.nombre }}</td>
-        <td class="align-middle pantallasGrandes" id="descripcion">{{ item.descripcion }}</td>       
+        <td class="align-middle pantallasGrandes" id="descripcion">{{ item.descripcion }}</td>
         <td class="align-middle botones">
           <app-btn-editar 
-          class="right" 
-          (click)="msgBack('Editar', item)"
-          class="pantallasGrandes" 
+            *ngIf="!user$.source._value.roles.user" 
+            class="right pantallasGrandes" 
+            (click)="msgBack('Editar', item)"
           >
           </app-btn-editar>
-           
-            <app-btn-reimpresion
-            class="right"
-            (click)="msgBack('Reimprimir', item)"
-            class="pantallasGrandes" 
-          >
-          </app-btn-reimpresion>       
-          
-          <app-btn-editar 
-          (click)="msgBack('Editar', item)" 
-          [name]="'nada'" 
-          class="pantallasPequenias"
-          >
-          </app-btn-editar>       
-        
           <app-btn-reimpresion
+            class="right pantallasGrandes"
             (click)="msgBack('Reimprimir', item)"
-            [nombre]="'nada'"   
-            class="pantallasPequenias"        
           >
           </app-btn-reimpresion>
-        
+          <app-btn-editar
+            *ngIf="!user$.source._value.roles.user"
+            (click)="msgBack('Editar', item)"
+            [name]="'nada'"
+            class="pantallasPequenias"
+          >
+          </app-btn-editar>
+          <app-btn-reimpresion
+            (click)="msgBack('Reimprimir', item)"
+            [nombre]="'nada'"
+            class="pantallasPequenias"
+          >
+          </app-btn-reimpresion>
+          <app-btn-eliminar
+            class="right pantallasGrandes"
+            *ngIf="!user$.source._value.roles.user"
+            (click)="msgBack('BorradoAdmin', item)"
+          >
+          </app-btn-eliminar>
         </td>
-        <!-- </div> -->
       </tr>
     </tbody>
   </table>
