@@ -46,8 +46,13 @@ export class PlayaControlComponent implements OnInit {
   /// RECIBE MENSAJE DE LA VISTA ///
 
   getMsg(msg: any) {
+  if (msg.op === 'BorradoAdmin') {
+    this.storageService.deleteItem(this.componente, msg.item);
+    this.logger.log('borrado.admin', msg.item);
+  } else {
     this.openForm(msg.op, msg.item);
   }
+}
 
   /// MODAL DEL FORM SEGUN INFO DE LA VISTA ////
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { Vehiculo } from 'src/app/interfaces/vehiculo';
 import { DbFirestoreService } from '../database/db-firestore.service';
 import { CajaStorageService } from '../caja/caja-storage.service';

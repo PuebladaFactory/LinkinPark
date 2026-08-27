@@ -13,12 +13,11 @@ export class CajaLogComponent implements OnInit {
   data: any;
   dtOptions: DataTables.Settings = {};
   componente: string = 'cajaLog';
-  sesionOps:any
+  sesionOps: any;
 
   constructor(
     private storageService: StorageService,
     private modalService: NgbModal,
-
   ) {}
 
   ngOnInit(): void {
@@ -32,18 +31,16 @@ export class CajaLogComponent implements OnInit {
       dom: 't<"bottom"riflp><"clear">',
       language: LanguageApp.spanish_datatables,
       columnDefs: [
-        //   { orderable: false, targets: [7,8,9] },
-        // { searchable: false, targets: [ 7,8,9] },
-        { width: '3rem', targets: 0},
+        { width: '3rem', targets: 0 },
+        { orderable: false, targets: 0 },
       ],
+      order: [[2, 'desc']], // ordena por la columna Cierre (indice 2)
       responsive: true,
     };
   }
 
   msgBack(item: any) {
-  
     {
-      // console.log ("msgback", item, "id", item.id)
       const modalRef = this.modalService.open(SesionViewComponent, {
         scrollable: true,
         windowClass: 'myCustomModalClass',
@@ -52,9 +49,6 @@ export class CajaLogComponent implements OnInit {
     }
   }
 
-
-
-  
   // interface cajaLog
 
   // apertura: 5 de diciembre de 2022, 15:13:36 UTC-3

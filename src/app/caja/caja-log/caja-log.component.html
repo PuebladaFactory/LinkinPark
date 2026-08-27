@@ -1,4 +1,4 @@
-<h1 class="display-1 pantallasGrandes" style="text-align: center">Historial de Caja</h1>
+<h1 class="display-1 pantallasGrandes">Historial de Caja</h1>
 
 <div class="container pantallasGrandes">
   <div>
@@ -18,15 +18,16 @@
       <tbody>
         <tr *ngFor="let item of data | async; let i = index">
           <td class="badge align-middle" scope="row">{{ i + 1 }}</td>
+
           <td class="align-middle">
             {{ item.apertura.seconds * 1000 | date : "dd/MM/yyyy - hh:mmaaa" }}
           </td>
 
-          <td class="align-middle" *ngIf="item?.cierre; else elsePerfId">
+          <td class="align-middle" [attr.data-order]="item.cierre.seconds * 1000" *ngIf="item?.cierre; else elsePerfId">
             {{ item.cierre.seconds * 1000 | date : "dd/MM/yyyy - hh:mmaaa" }}
           </td>
           <ng-template #elsePerfId>
-            <td class="align-middle">-- --</td>
+            <td class="align-middle" data-order="0">-- --</td>
           </ng-template>
 
           <td class="align-middle">{{ item.estado }}</td>
@@ -38,7 +39,6 @@
               name="Consultar"
               class="d-flex align-items-center"
               (click)="msgBack(item)"
-
             >
             </app-btn-consultar>
           </td>

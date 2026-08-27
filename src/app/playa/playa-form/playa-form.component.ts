@@ -17,7 +17,8 @@ import { StorageService } from 'src/app/servicios/storage/storage.service';
 })
 export class PlayaFormComponent implements OnInit {
   @Input() fromParent: any;
-  barCodeId: string = 'BC';
+  // barCodeId: string = 'BC';
+  barCodeId: string = '.';
   editForm!: any;
   titulo!: string;
   formTitle: string
@@ -39,11 +40,13 @@ export class PlayaFormComponent implements OnInit {
   puestoEstacionamiento!: any;
   tarifaSeleccionada!: Tarifas;
   saldo!: number;
+  totalCalculado!: number; // total real de la estadia, calculado al egreso (independiente de cuanto ya se pago)
   patentesPlaya!: any;
   clienteExiste: any;
   sinEdicion: boolean = true;
   vehiculoEliminar!: any;
   tarifaEliminar: Tarifas;
+  cobrarAhora: boolean = false;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -80,12 +83,11 @@ export class PlayaFormComponent implements OnInit {
   setearComponente() {
     this.titulo = this.fromParent.modo;
     this.item = this.fromParent.item;
-    
+
     this.editForm.patchValue({
       patente: this.fromParent.item.patente,
     });
 
-    
 
 
     switch (this.titulo) {
@@ -206,6 +208,8 @@ export class PlayaFormComponent implements OnInit {
   }
 
   buscarPatenteEnPlaya() {
+    let patente = this.editForm.value.patente.toUpperCase(); // case sensitive patente cc
+    this.editForm.patchValue({ patente: patente }); //actualiza el form con patente mayuscula
     let esPatenteNueva = this.validacionPatente.buscarPatentePlaya(
       this.editForm.value.patente,
       this.patentesPlaya
@@ -233,7 +237,7 @@ export class PlayaFormComponent implements OnInit {
     this.fechas.fechaSalida = this.fechaService.fechaDia(this.fechaSalida);
     this.fechas.horaSalida = this.fechaService.fechaHora(this.fechaSalida);
     this.fechas.estadia = this.fechaService.pruebaCierreHora(
-      this.fechas.fechaDate
+    this.fechas.fechaDate
     );
     this.fechas.fechaSalidaDate = this.fechaSalida.toString();
     this.saldoEstadia();
@@ -249,34 +253,59 @@ export class PlayaFormComponent implements OnInit {
   }
 
   saldoEstadia() {
-    this.saldo = this.estadiaService.saldoEstadia(
+    /*this.saldo = this.estadiaService.saldoEstadia(
       this.tarifaSeleccionada,
       this.fechas.estadia
-    );
+    );*/
+   const totalCalculado = this.estadiaService.saldoEstadia(
+    this.tarifaSeleccionada,
+    this.fechas.estadia
+  );
+
+  const montoACuenta = this.item.montoACuenta || 0;
+  const diferencia = totalCalculado - montoACuenta;
+
+  this.saldo = diferencia > 0 ? diferencia : 0;
+
+  // se guarda como propiedad del componente para poder pasarlo junto con
+  // el vehiculo (item.total) y que Facturacion registre el valor real de la
+  // estadia, sin tener que reconstruirlo sumando montoACuenta + saldo despues.
+  this.totalCalculado = totalCalculado;
+
+
+
     this.armarPuestoEstacionamiento();
   }
 
   armarPuestoEstacionamiento() {
     let fechaLimpia = this.fechas.fechaIngreso.replace(/[^0-9A-Z]+/gi, '');
     let horaLimpia = this.fechas.horaIngreso.replace(/[^0-9A-Z]+/gi, '');
+      // Preserva el monto a cuenta que ya estaba guardado (del ingreso),
+      // solo lo recalcula desde el checkbox cuando estamos armando un ingreso nuevo.
+      const montoACuentaPrevio = this.item.montoACuenta || 0;
+
     //la funcion arma el puesto
     this.puestoEstacionamiento = {
       id: this.item.id,
-      patente: this.editForm.value.patente,
+      patente: this.editForm.value.patente.toUpperCase(), // case sensitive patente cc
       fechas: this.fechas,
       tarifa: this.tarifaSeleccionada,
       descripcion: this.editForm.value.descripcion,
       saldo: this.saldo,
+      total: this.totalCalculado ?? null, // total real de la estadia (solo definido en el egreso; null en el ingreso, NUNCA undefined -> Firestore rechaza documentos con undefined)
       // codigoBarras: `${this.barCodeId}-${this.fromParent.item.patente}${fechaLimpia}${horaLimpia}`,
-      codigoBarras: `${this.barCodeId}-${this.fromParent.item.patente}`,
-
+      codigoBarras: `${this.barCodeId}${this.fromParent.item.patente.toUpperCase()}`,
+      montoACuenta: this.titulo === 'Agregar'
+          ?  (this.cobrarAhora ? Number(this.tarifaSeleccionada.valor) : 0)
+          :montoACuentaPrevio,
 
     };
-    this.item = this.puestoEstacionamiento; //gurda el puesto en "item" para poder enviarlo
+    this.item = this.puestoEstacionamiento; //guarda el puesto en "item" para poder enviarlo
     this.ventanaConfirmacion();
   }
 
   chequearSiEsCliente() {
+    let patante = this.editForm.value.patente.toUpperCase(); // case sensitive patente cc
     let consulta = this.clientesService.buscarPatenteEnClientes(
       this.fromParent.item.patente
     );
@@ -296,7 +325,9 @@ export class PlayaFormComponent implements OnInit {
     return tarifas[0];
   }
 
+
   egresoVehiculo() {
+    let patente = this.editForm.value.patente.toUpperCase(); // case sensitive patente cc
     this.vehiculoEliminar = this.validacionPatente.traerVehiculoPorPatente(
       this.editForm.value.patente,
       this.patentesPlaya
@@ -306,6 +337,10 @@ export class PlayaFormComponent implements OnInit {
     this.item = this.vehiculoEliminar; //gurda el puesto en "item" para poder enviarlo
   }
 
+  toUpperCase(event: Event){
+    const input = event.target as HTMLInputElement;
+    this.editForm.patchValue({ patente: input.value.toUpperCase() })
+  }
   ventanaConfirmacion() {
     switch (this.titulo) {
       case 'Agregar': {

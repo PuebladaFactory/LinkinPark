@@ -1,20 +1,27 @@
 <div class="modal-header">
   <h5 class="modal-title" id="modal-basic-title">{{formTitle}} Vehiculo </h5>
   <button type="button"
-          class="close"
-          class="btn btn-primary" (click)="activeModal.dismiss('Cross click')">
+          class="btn btn-primary"
+          aria-label="Cerrar"
+          title="Cerrar"
+          (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
   <div class="container">
-      <div class="modal-body">
-        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+              <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="Patente">Patente</label>
+            <label for="patenteInput">Patente</label>
             <div class="input-group">
-              <input formControlName="patente" class="form-control" required type="text"
-              [ngClass]="{'is-invalid':Patente?.errors && Patente?.touched, 'is-valid': !Patente?.errors && !Patente?.touched }"
+              <input id="patenteInput"
+                       formControlName="patente"
+                       class="form-control"
+                       required
+                       type="text" 
+                       placeholder="ingrese pantente"
+                       (input)="toUpperCase($event)"
+                       [ngClass]="{'is-invalid':Patente?.errors && Patente?.touched, 'is-valid': !Patente?.errors && Patente?.touched }"
               [readonly]="sinEdicion">    
               <div *ngIf="Patente?.errors?.required && Patente?.touched" class="text-danger fs-6">
                   Ingrese la patente por favor
@@ -25,32 +32,46 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="Tarifa">Tarifa</label>        
-            <select class="form-select form-select-md mb-3" (change)="changeTarifa($event)">
+            <label for="tarifaSelect">Tarifa</label>        
+            <select id="tarifaSelect" class="form-select form-select-md mb-3" (change)="changeTarifa($event)" aria-label="Tarifa" title="tarifa">
               <option value={{tarifaSeleccionada}}>Elegir Tarifa</option>
               <option *ngFor="let tarifa of tarifas">
                 {{tarifa.nombre}}
               </option>
             </select>
           </div>
+          <div class="form-group" *ngIf="titulo === 'Agregar' && tarifaSeleccionada">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="cobrarAhora"
+                  [(ngModel)]="cobrarAhora"
+                  [ngModelOptions]="{standalone: true}"
+                />
+                <label class="form-check-label" for="cobrarAhora">
+                  Cobrar ahora (${{ tarifaSeleccionada.valor }})
+                </label>
+              </div>
+            </div>
           <div class="form-group">
-            <label for="Descripcion">Descripcion</label>
+            <label for="descripcionInput">Descripcion</label>
             <div class="input-group">
-              <input formControlName="descripcion" class="form-control" required type="text">
+              <input id="descripcionInput" formControlName="descripcion" class="form-control" required type="text" placeholder="descripcion">
             </div>
           </div>
           <table class="table" *ngIf='titulo==="Agregar"'>
             <tr>
               <td>
                 <div class="form-group p-0">
-                  <label for="ingreso">Ingreso</label>
+                  <label for="fechaIngresoInput">Ingreso</label>
                   <div class="input-group mb-3">
                     <span class="input-group-text ">Fecha</span>
-                    <input class="fw-bold" type="text" value="{{fechas.fechaIngreso}}" disabled>
+                    <input id="fechaIngresoInput" class="fw-bold" type="text" placeholder="ingreso" value="{{fechas.fechaIngreso}}" disabled>
                   </div>
                   <div class="input-group mb-3">
                     <span class="input-group-text">Hora</span>
-                    <input class="fw-bold" type="text" value="{{fechas.horaIngreso}} " disabled>
+                    <input id="horaIngresoInput" class="fw-bold" type="text" placeholder="hora" value="{{fechas.horaIngreso}} " disabled>
                   </div>
                 </div>
               </td>
@@ -62,8 +83,7 @@
             </button>
           </div>
         </form>
-      </div>
+      
       
     </div> 
 </div>
-

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import { DbFirestoreService } from '../../database/db-firestore.service';
 import { firstValueFrom, take } from 'rxjs';
 
@@ -19,7 +19,7 @@ export class ConsultaFacturacionService {
 
  
   convertirMilisegundosAFecha(numero: number) {
-    let date = moment(numero).format('DD MMM YYYY hh:mm a');
+    let date = moment(numero).format('YYYY MM DD hh:mm a');
     return date;
   }
 

@@ -132,7 +132,7 @@ export class StorageService {
     this.getAllSorted('playa', 'fechas.fechaDate', 'asc');
     this.getAllSorted('tarifas', 'categoria', 'asc');
     this.getAllSorted('clientes', 'apellido', 'asc');
-    this.getNLatestOperations('cajaLog', 'apertura', 'asc',10);
+    this.getNLatestOperations('cajaLog', 'cierre', 'desc',50);
     this.getAllSortedToday('facturacion', 'fechaOp', 'asc');
     this.getNLatestOperations('logger', 'Fecha', 'asc', 10);
     this.getUsuarios();
