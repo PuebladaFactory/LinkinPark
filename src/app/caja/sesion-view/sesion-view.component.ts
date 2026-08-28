@@ -32,7 +32,8 @@ export class SesionViewComponent implements OnInit {
       .getByFieldValue('caja', 'sesionId', sesionId)
       .pipe(
         tap((data) => {
-          this.data = data;
+          // se ordena por fecha, porque getByFieldValue no aplica orderBy
+          this.data = [...data].sort((a: any, b: any) => a.fecha.seconds - b.fecha.seconds);
           // console.log('this sesion ops', this.data);
           // saldo: this.calcularSaldo(data)
         })
