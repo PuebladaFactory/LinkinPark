@@ -9,6 +9,7 @@ import { EstadiaService } from 'src/app/servicios/facturacion/estadia.service';
 import { ClientesService } from 'src/app/servicios/clientes.service';
 import Swal from 'sweetalert2';
 import { StorageService } from 'src/app/servicios/storage/storage.service';
+import { LogService } from 'src/app/servicios/log.service';
 
 @Component({
   selector: 'app-playa-form',
@@ -39,14 +40,13 @@ export class PlayaFormComponent implements OnInit {
   componenteTarifas: string = 'tarifas';
   puestoEstacionamiento!: any;
   tarifaSeleccionada!: Tarifas;
+  tarifaOriginal!: Tarifas; // tarifa con la que se entro al editar, para comparar si cambio
   saldo!: number;
-  totalCalculado!: number; // total real de la estadia, calculado al egreso (independiente de cuanto ya se pago)
   patentesPlaya!: any;
   clienteExiste: any;
   sinEdicion: boolean = true;
   vehiculoEliminar!: any;
   tarifaEliminar: Tarifas;
-  cobrarAhora: boolean = false;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -55,7 +55,8 @@ export class PlayaFormComponent implements OnInit {
     private fechaService: CalculoFechasService,
     private estadiaService: EstadiaService,
     private clientesService: ClientesService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private logger: LogService
   ) {
     this.createForm();
   }
@@ -106,6 +107,7 @@ export class PlayaFormComponent implements OnInit {
         this.sinEdicion = false;
         this.saldo = 0;
         this.tarifaSeleccionada = this.item.tarifa;
+        this.tarifaOriginal = this.item.tarifa; // guardamos la tarifa con la que se entro, para comparar despues
         this.fechas = this.item.fechas;
         this.configurarForm();
         break;
@@ -253,37 +255,16 @@ export class PlayaFormComponent implements OnInit {
   }
 
   saldoEstadia() {
-    /*this.saldo = this.estadiaService.saldoEstadia(
+    this.saldo = this.estadiaService.saldoEstadia(
       this.tarifaSeleccionada,
       this.fechas.estadia
-    );*/
-   const totalCalculado = this.estadiaService.saldoEstadia(
-    this.tarifaSeleccionada,
-    this.fechas.estadia
-  );
-
-  const montoACuenta = this.item.montoACuenta || 0;
-  const diferencia = totalCalculado - montoACuenta;
-
-  this.saldo = diferencia > 0 ? diferencia : 0;
-
-  // se guarda como propiedad del componente para poder pasarlo junto con
-  // el vehiculo (item.total) y que Facturacion registre el valor real de la
-  // estadia, sin tener que reconstruirlo sumando montoACuenta + saldo despues.
-  this.totalCalculado = totalCalculado;
-
-
-
+    );
     this.armarPuestoEstacionamiento();
   }
 
   armarPuestoEstacionamiento() {
     let fechaLimpia = this.fechas.fechaIngreso.replace(/[^0-9A-Z]+/gi, '');
     let horaLimpia = this.fechas.horaIngreso.replace(/[^0-9A-Z]+/gi, '');
-      // Preserva el monto a cuenta que ya estaba guardado (del ingreso),
-      // solo lo recalcula desde el checkbox cuando estamos armando un ingreso nuevo.
-      const montoACuentaPrevio = this.item.montoACuenta || 0;
-
     //la funcion arma el puesto
     this.puestoEstacionamiento = {
       id: this.item.id,
@@ -292,13 +273,8 @@ export class PlayaFormComponent implements OnInit {
       tarifa: this.tarifaSeleccionada,
       descripcion: this.editForm.value.descripcion,
       saldo: this.saldo,
-      total: this.totalCalculado ?? null, // total real de la estadia (solo definido en el egreso; null en el ingreso, NUNCA undefined -> Firestore rechaza documentos con undefined)
       // codigoBarras: `${this.barCodeId}-${this.fromParent.item.patente}${fechaLimpia}${horaLimpia}`,
       codigoBarras: `${this.barCodeId}${this.fromParent.item.patente.toUpperCase()}`,
-      montoACuenta: this.titulo === 'Agregar'
-          ?  (this.cobrarAhora ? Number(this.tarifaSeleccionada.valor) : 0)
-          :montoACuentaPrevio,
-
     };
     this.item = this.puestoEstacionamiento; //guarda el puesto en "item" para poder enviarlo
     this.ventanaConfirmacion();
@@ -369,6 +345,14 @@ export class PlayaFormComponent implements OnInit {
           confirmButtonText: 'Confirmar',
         }).then((result) => {
           if (result.isConfirmed) {
+            // solo se genera log si la tarifa realmente cambio respecto a la original
+            if (this.tarifaOriginal?.nombre !== this.tarifaSeleccionada?.nombre) {
+              this.logger.log('tarifa-editada', {
+                patente: this.item.patente,
+                tarifaAnterior: this.tarifaOriginal?.nombre,
+                tarifaNueva: this.tarifaSeleccionada?.nombre,
+              });
+            }
             this.closeModal();
           }
         });
