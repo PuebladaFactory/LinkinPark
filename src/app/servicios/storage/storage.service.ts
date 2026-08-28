@@ -134,7 +134,7 @@ export class StorageService {
     this.getAllSorted('clientes', 'apellido', 'asc');
     this.getNLatestOperations('cajaLog', 'cierre', 'desc',50);
     this.getAllSortedToday('facturacion', 'fechaOp', 'asc');
-    this.getNLatestOperations('logger', 'Fecha', 'asc', 10);
+    this.getNLatestOperations('logger', 'Fecha', 'desc', 50);
     this.getUsuarios();
     // this.getCaja();
     this.getVehiculos();
