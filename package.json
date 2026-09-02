@@ -6,7 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:pfparkapp": "ng build --configuration=pfparkapp",
+    "build:rivera": "ng build --configuration=rivera-cba",
+    "deploy:pfparkapp": "npm run build:pfparkapp && firebase use prod && firebase deploy --only hosting",
+    "deploy:rivera": "npm run build:rivera && firebase use rivera && firebase deploy --only hosting"
   },
   "private": true,
   "dependencies": {
