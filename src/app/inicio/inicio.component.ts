@@ -64,7 +64,7 @@ export class InicioComponent implements OnInit {
   // AL PULSAR ENTER O CUALQUIERA DE LOS BOTONES DE INGRESO O EGRESO
 
   onSubmit() {
-    let str = this.patenteForm.value.patente;
+    let str = this.patenteForm.value.patente.toUpperCase().trim();
 
     // CHEQUEA VALIDEZ FORM AL ENVIAR, SI PASA VEMOS QUE HACEMOS
     if (this.patenteForm.valid) {
