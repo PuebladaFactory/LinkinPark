@@ -8,6 +8,7 @@
   class="close"
   class="btn btn-primary"
   (click)="closeModal()"
+  title="Close Modal"
 >
   <span aria-hidden="true">&times;</span>
 </button>
@@ -35,10 +36,8 @@
       <br>
       <br>
       <br>
-      <div class="containerRotado">
-        <div class="rotado">
-          <div style="text-align: center">
-            >
+          <div class="barcode-container">
+            
             
             <ngx-barcode6
               [bc-format]="format"
@@ -49,9 +48,8 @@
             >
             </ngx-barcode6>
           </div>
-        </div>
       </div>
-    </div>
+    
     <br>
       <br>
       <br>

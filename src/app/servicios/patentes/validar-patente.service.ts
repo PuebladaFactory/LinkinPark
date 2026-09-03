@@ -19,7 +19,7 @@ export class ValidarPatenteService implements Validator {
     patentesNuevas: /^[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}$/,
     patentesMotosViejas: /^[0-9]{3}[a-zA-Z]{3}$/,
     patentesMotosNuevas: /^[a-zA-Z]{1}[0-9]{3}[a-zA-Z]{3}$/,
-    barCode: /^[BC]{2}[\-]{1}/,
+    barCode: /^\.[A-Za-z0-9]{6,7}$/,
   };
 
   // BARCODES //
