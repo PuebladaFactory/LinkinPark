@@ -1,8 +1,8 @@
 /* TODO: optimize */
-.containerRotado{
+
+.barcode-container {
   text-align: center;
   width: 100%;
-//  overflow: hidden; /* Prevent overflowing of nested elements */
 }
 
 
@@ -25,7 +25,7 @@ body {
   
   .receipt {
       // padding: 3mm;
-      width: 80mm;
+      width: 48mm;
       border: 1px solid black;
   }
   .orderNo {
@@ -297,4 +297,3 @@ body {
       border-width: 36px;
       margin-top: -36px;
   }
-
