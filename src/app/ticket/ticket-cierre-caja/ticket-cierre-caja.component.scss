@@ -20,6 +20,10 @@
     .receipt {
         // padding: 3mm;
         width: 48mm;
+        box-sizing: border-box;
+        overflow: hidden;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
         border: 1px solid black;
     }
 

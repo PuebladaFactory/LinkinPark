@@ -7,16 +7,21 @@
     <app-ticket-header></app-ticket-header>
 
     <!-- CONTENIDO -->
-    <div class="location">Operador: {{ this.getInfo.nombreUsuario }}</div>
-    <div class="location">Sesion: {{ this.getInfo.sesionCajaId | json }}</div>
+    
     <div class="location">
       Inicio:
       {{
         this.getInfo.sesionCajaApertura.seconds * 1000
-          | date : "dd/MM/yyyy - hh:mmaaa"
+          | date : "dd/MM/yyyy"
       }}
     </div>
-
+    <div class="location">
+      Inicio:
+      {{
+        this.getInfo.sesionCajaApertura.seconds * 1000
+          | date : "hh:mmaaa"
+      }}
+    </div>
     <div class="location">
       Sdo Inicial :
       {{
@@ -27,7 +32,11 @@
 
     <div class="location">
       Fin:
-      {{ this.getInfo.sesionCajaCierre | date : "dd/MM/yyyy - hh:mmaaa" }}
+      {{ this.getInfo.sesionCajaCierre | date : "dd/MM/yyyy" }}
+    </div>
+    <div class="location">
+      Fin:
+      {{ this.getInfo.sesionCajaCierre | date : "hh:mmaaa" }}
     </div>
 
     <div class="location">
@@ -39,11 +48,18 @@
 
     <hr />
     <div class="location">
-      Vehiculos egresados : {{ this.getInfo.cantEgresosVehiculos }}
+      Vehiculos egresados :
     </div>
     <div class="location">
-      Vehiculos en playa : {{ this.getInfo.listadoPatentes.length }}
+      {{ this.getInfo.cantEgresosVehiculos }}
     </div>
+    <div class="location">
+      Vehiculos en playa :
+    </div>
+    <div class="location">
+      {{ this.getInfo.listadoPatentes.length }}
+    </div>
+    
     <div class="location">Patentes</div>
     <div *ngFor="let item of this.getInfo.listadoPatentes; let i = index">
       <p class="inpark" style="text-align: center">
