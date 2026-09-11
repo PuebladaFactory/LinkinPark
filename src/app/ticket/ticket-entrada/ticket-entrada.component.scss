@@ -24,9 +24,11 @@ body {
   }
   
   .receipt {
-      // padding: 3mm;
+      padding: 4px 8px;
       width: 48mm;
-      border: 1px solid black;
+      box-sizing: border-box;
+      overflow: hidden;
+      //border: 1px solid black;
   }
   .orderNo {
     width: 100%;

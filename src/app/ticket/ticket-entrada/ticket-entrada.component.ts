@@ -50,10 +50,10 @@ export class TicketEntradaComponent implements OnInit {
 
   format = 'CODE128B';
   value = ``;
-  width = 1.0;      // <-- CAMBIO: de 2.5 a 1.5, para que el ancho del código de barras entre en 48mm
-  height = 80;
+  width = 1.5;      // <-- CAMBIO: de 2.5 a 1.5, para que el ancho del código de barras entre en 48mm
+  height = 100;
   displayValue = true;
-  fontSize = 12;
+  fontSize = 25;
 
   /////// estas son los atributos con los que se pueden configurar ngx-barcode6
   /* elementType = "svg";
