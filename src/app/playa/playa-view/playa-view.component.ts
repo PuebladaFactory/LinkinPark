@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, OnChanges, SimpleChanges, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnDestroy, Output, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { LanguageApp } from 'src/app/shared/DTLanguage';
 import { StorageService } from 'src/app/servicios/storage/storage.service';
 import Swal from 'sweetalert2';
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
   templateUrl: './playa-view.component.html',
   styleUrls: ['./playa-view.component.scss'],
 })
-export class PlayaViewComponent implements OnInit, OnChanges {
+export class PlayaViewComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
 
@@ -22,39 +23,53 @@ export class PlayaViewComponent implements OnInit, OnChanges {
   msg: any;
   user$!: any; //para roles de usuario
 
+  private dataSubscription?: Subscription;
+  private isRerendering = false;
+
   constructor(private storageService: StorageService) {}
 
   ngOnInit(): void {
     this.user$ = this.storageService.usuario$;
     this.setearDataTable();
 
-    // nos suscribimos al observable que llega por @Input
-    this.data.subscribe((items: any[]) => {
-      if (items && items.length > 0) {
-        this.rerenderTabla();
-      }
-    });
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    // por si el @Input cambia de referencia (por ejemplo, cambio de coleccion)
-    if (changes['data'] && !changes['data'].firstChange) {
-      this.data.subscribe((items: any[]) => {
+    // debounceTime agrupa varios cambios seguidos (por ejemplo, cuando la
+    // pestaña estuvo inactiva y Firestore sincroniza de golpe varios cambios
+    // pendientes) en uno solo, evitando destruir/reinicializar la tabla varias
+    // veces casi al mismo tiempo. Eso era lo que disparaba
+    // "Cannot reinitialise DataTable" repetidas veces.
+    this.dataSubscription = this.data
+      .pipe(debounceTime(300))
+      .subscribe((items: any[]) => {
         if (items && items.length > 0) {
           this.rerenderTabla();
         }
       });
-    }
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+    this.dataSubscription?.unsubscribe();
   }
 
   rerenderTabla(): void {
+    // evita solapar un destroy/reinit mientras el anterior todavia no termino
+    if (this.isRerendering) {
+      return;
+    }
+    this.isRerendering = true;
+
     if (this.dtElement && this.dtElement.dtInstance) {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        dtInstance.destroy();
-        this.dtTrigger.next(null);
-      });
+      this.dtElement.dtInstance
+        .then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.dtTrigger.next(null);
+        })
+        .finally(() => {
+          this.isRerendering = false;
+        });
     } else {
       this.dtTrigger.next(null);
+      this.isRerendering = false;
     }
   }
 

@@ -120,6 +120,12 @@
             },
             "development": {
               "browserTarget": "linkinpark:build:development"
+            },
+            "rivera-cba": {
+              "browserTarget": "linkinpark:build:rivera-cba"
+            },
+            "pfparkapp": {
+              "browserTarget": "linkinpark:build:pfparkapp"
             }
           },
           "defaultConfiguration": "development"
