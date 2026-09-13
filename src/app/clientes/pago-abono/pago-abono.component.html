@@ -1,6 +1,5 @@
-<!--<div class="d-flex justify-content-end"> -->
-  <div class="modal-header">
-    <h1 class="modal-title" id="modal-basic-title"></h1>
+<div class="modal-header">
+  <h1 class="modal-title" id="modal-basic-title"></h1>
   <button
     type="button"
     class="close"
@@ -11,39 +10,51 @@
   </button>
 </div>
 
-<div id="ticket" class="receipt">
-  <div class="location">Ticket Abono</div>
+<div class="d-flex justify-content-center">
+  <div id="ticket" class="receipt">
+    <div class="location">Ticket Abono</div>
 
-  <app-ticket-header></app-ticket-header>
+    <app-ticket-header></app-ticket-header>
 
-  <div class="location">
-    Emitido: <br />
-    {{ fechaHoraActual | date : "dd/MM/yyyy HH:mm:ss" : "local" }}
+    <div class="location">
+      Emitido: <br />
+      {{ fechaHoraActual | date : "dd/MM/yyyy HH:mm:ss" : "local" }}
+    </div>
+    <div class="location">
+      Cliente: <br />
+      {{ cliente.apellido }} {{ cliente.nombre }}
+    </div>
+
+    <div class="location">
+      Patente: <br />
+      {{ item.patente }}
+    </div>
+
+    <div class="location">
+      Tarifa: <br />
+      {{ item.tarifa.nombre }}
+    </div>
+
+    <div class="location">Importe: <br />{{ item.tarifa.valor }}
+      <!-- ESPACIO PARA QUE NO CORTE AL RAS -->
+      <div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <p>-------------------</p>
+      </div>
+      
+    </div>
+     
   </div>
-  <div class="location">
-    Cliente: <br />
-    {{ cliente.apellido }} {{ cliente.nombre }}
-  </div>
-
-  <div class="location">
-    Patente: <br />
-    {{ item.patente }}
-  </div>
-
-  <div class="location">
-    Tarifa: <br />
-    {{ item.tarifa.nombre }}
-  </div>
-
-  <div class="location">Importe: <br />{{ item.tarifa.valor }}</div>
 </div>
 <div>
-
   <div>
     <app-btn-agregar
       [name]="'Confirmar'"
       class="fa"
       (click)="pago()"
-      ></app-btn-agregar>
+    ></app-btn-agregar>
   </div>
 </div>

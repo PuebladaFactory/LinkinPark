@@ -19,8 +19,8 @@
     
     .receipt {
         // padding: 3mm;
-        width: 80mm;
-        border: 1px solid black;
+        width: 48mm;
+        //border: 1px solid black;
     }
     .orderNo {
       width: 100%;
@@ -43,22 +43,22 @@
     .headerTitle {
   
       text-align: center;
-      font-size: 24pt;
+      font-size: 16pt;
       font-weight: bold;
     }
     
     .location {
       margin-top: 5pt;
       text-align: center;
-      font-size: 16pt;
+      font-size: 10pt;
       font-weight: bold;
     }
     
     #date {
-      margin: 5pt 0px;
+      margin: 2pt 0px;
       text-align: center;
       font-weight: bold;
-      font-size: 22pt;
+      font-size: 12pt;
     }
     
     #barcode {
@@ -80,7 +80,7 @@
     
     .keepIt {
       text-align: center;
-      font-size: 12pt;
+      font-size: 8pt;
       font-weight: bold;
     }
     
@@ -291,5 +291,3 @@
         border-width: 36px;
         margin-top: -36px;
     }
-  
-  

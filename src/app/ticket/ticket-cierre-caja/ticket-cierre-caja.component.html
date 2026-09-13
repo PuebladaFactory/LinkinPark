@@ -1,71 +1,82 @@
 <!-- TITULO -->
-<div class="d-flex justify-content-center" id="ticket">
+<div class="d-flex justify-content-center" >
   <div id="ticket" class="receipt">
     <div class="location">CIERRE DE CAJA</div>
 
+    
+  <div class="d-flex justify-content-center">
+    <div id="ticket" class="receipt">
     <!-- HEADER -->
     <app-ticket-header></app-ticket-header>
 
     <!-- CONTENIDO -->
-    
-    <div class="location">
-      Inicio:
-      {{
-        this.getInfo.sesionCajaApertura.seconds * 1000
-          | date : "dd/MM/yyyy"
-      }}
-    </div>
-    <div class="location">
-      Inicio:
-      {{
-        this.getInfo.sesionCajaApertura.seconds * 1000
-          | date : "hh:mmaaa"
-      }}
-    </div>
-    <div class="location">
-      Sdo Inicial :
-      {{
-        this.getInfo.saldoInicialCaja
-          | currency : "ARS" : "symbol-narrow" : "1.0-0"
-      }}
-    </div>
+        <div class="location">
+          Inicio:
+          {{
+            this.getInfo.sesionCajaApertura.seconds * 1000
+              | date : "dd/MM/yyyy"
+          }}
+        </div>
+        <div class="location">
+          Inicio:
+          {{
+            this.getInfo.sesionCajaApertura.seconds * 1000
+              | date : "hh:mmaaa"
+          }}
+        </div>
+        <div class="location">
+          Sdo Inicial :
+          {{
+            this.getInfo.saldoInicialCaja
+              | currency : "ARS" : "symbol-narrow" : "1.0-0"
+          }}
+        </div>
 
-    <div class="location">
-      Fin:
-      {{ this.getInfo.sesionCajaCierre | date : "dd/MM/yyyy" }}
-    </div>
-    <div class="location">
-      Fin:
-      {{ this.getInfo.sesionCajaCierre | date : "hh:mmaaa" }}
-    </div>
+        <div class="location">
+          Fin:
+          {{ this.getInfo.sesionCajaCierre | date : "dd/MM/yyyy" }}
+        </div>
+        <div class="location">
+          Fin:
+          {{ this.getInfo.sesionCajaCierre | date : "hh:mmaaa" }}
+        </div>
 
-    <div class="location">
-      Sdo Final :
-      {{
-        this.getInfo.saldoCaja | currency : "ARS" : "symbol-narrow" : "1.0-0"
-      }}
-    </div>
+        <div class="location">
+          Sdo Final :
+          {{
+            this.getInfo.saldoCaja | currency : "ARS" : "symbol-narrow" : "1.0-0"
+          }}
+        </div>
 
-    <hr />
-    <div class="location">
-      Vehiculos egresados :
-    </div>
-    <div class="location">
-      {{ this.getInfo.cantEgresosVehiculos }}
-    </div>
-    <div class="location">
-      Vehiculos en playa :
-    </div>
-    <div class="location">
-      {{ this.getInfo.listadoPatentes.length }}
-    </div>
-    
-    <div class="location">Patentes</div>
-    <div *ngFor="let item of this.getInfo.listadoPatentes; let i = index">
-      <p class="inpark" style="text-align: center">
-        {{ i + 1 }} - | {{ item }}
-      </p>
+        <hr />
+        <div class="location">
+          Vehiculos egresados :
+        </div>
+        <div class="location">
+          {{ this.getInfo.cantEgresosVehiculos }}
+        </div>
+        <div class="location">
+          Vehiculos en playa :
+        </div>
+        <div class="location">
+          {{ this.getInfo.listadoPatentes.length }}
+        </div>
+        
+        <div class="location">Patentes</div>
+        <div *ngFor="let item of this.getInfo.listadoPatentes; let i = index">
+          <p class="inpark" style="text-align: center">
+            {{ i + 1 }} - | {{ item }}
+          </p>
+        </div>
+          <!-- ESPACIO PARA QUE NO CORTE AL RAS -->
+          <div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <p>-------------------</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  </div>
-

@@ -1,5 +1,3 @@
-/* TODO: optimize */
-
 #ticket{
     width: 100%;
    }
@@ -20,11 +18,7 @@
     .receipt {
         // padding: 3mm;
         width: 48mm;
-        box-sizing: border-box;
-        overflow: hidden;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        border: 1px solid black;
+        /*border: 1px solid black;*/
     }
 
     hr {
@@ -53,20 +47,20 @@
     .headerTitle {
   
       text-align: center;
-      font-size: 24pt;
+      font-size: 16pt;
       font-weight: bold;
     }
     
     .location {
       margin-top: 5pt;
       text-align: center;
-      font-size: 12pt;
+      font-size: 10pt;
       font-weight: bold;
     }
     .inpark {
       margin-top: 5pt;
       text-align: center;
-      font-size: 11pt;
+      font-size: 10pt;
       font-weight: bold;
     }
     
@@ -74,7 +68,7 @@
       margin: 5pt 0px;
       text-align: center;
       font-weight: bold;
-      font-size: 22pt;
+      font-size: 12pt;
     }
     
     #barcode {
