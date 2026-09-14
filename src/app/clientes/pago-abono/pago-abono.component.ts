@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPrintElementService } from 'ngx-print-element';
 import { Clientes } from 'src/app/interfaces/clientes';
 import { Vehiculo } from 'src/app/interfaces/vehiculo';
+import { EstadoCajaService } from 'src/app/servicios/caja/estado-caja.service';
 
 import Swal from 'sweetalert2';
 
@@ -21,7 +22,8 @@ export class PagoAbonoComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    public printService: NgxPrintElementService
+    public printService: NgxPrintElementService,
+    private estadoCajaService: EstadoCajaService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,14 @@ export class PagoAbonoComponent implements OnInit {
   }
 
   pago() {
+    let modoCajaActual: string = '';
+    this.estadoCajaService.modoCaja$.subscribe((modo) => (modoCajaActual = modo));
+
+    if (modoCajaActual !== 'abierta') {
+      Swal.fire('Debe abrir la caja antes de cobrar un abono.');
+      return;
+    }
+
     Swal.fire({
       title: '¿Desea confirmar el pago?',
       icon: 'warning',
