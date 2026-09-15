@@ -17,7 +17,7 @@
               <div class="form-group">
                 <label for="Apellido">Apellido</label>
                 <div class="input-group">
-                  <input formControlName="apellido" class="form-control" required type="text"
+                  <input formControlName="apellido" class="form-control" required type="text" title="apellido"
                   [ngClass]="{'is-invalid':Apellido?.errors && Apellido?.touched, 'is-valid': !Apellido?.errors && !Apellido?.touched }"
                   [ngClass]="{'isDisabled': soloVista}">
                 </div>
@@ -25,7 +25,7 @@
               <div class="form-group">
                 <label for="Nombre">Nombre</label>
                 <div class="input-group">
-                  <input formControlName="nombre" class="form-control" required type="text"
+                  <input formControlName="nombre" class="form-control" required type="text" title="nombre"
                   [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched, 'is-valid': !Nombre?.errors && !Nombre?.touched }"
                   [ngClass]="{'isDisabled': soloVista}">
                 </div>
@@ -34,7 +34,7 @@
               <div class="form-group">
                 <label for="Telefono">Telefono</label>
                 <div class="input-group">
-                  <input formControlName="telefono" class="form-control"  type="text"
+                  <input formControlName="telefono" class="form-control"  type="text" title="telefono"
                   [ngClass]="{'is-invalid':Telefono?.errors && Telefono?.touched, 'is-valid': !Telefono?.errors && !Telefono?.touched }"
                   [ngClass]="{'isDisabled': soloVista}">                  
                 </div>
@@ -43,7 +43,7 @@
               <div class="form-group">
                 <label for="Direccion">Direccion</label>
                 <div class="input-group">
-                  <input formControlName="direccion" class="form-control"  type="text"
+                  <input formControlName="direccion" class="form-control"  type="text" title="direccion"
                   [ngClass]="{'isDisabled': soloVista}">
                 </div>
               </div>
@@ -64,7 +64,7 @@
               <div class="form-group">
                 <label for="Comentario">Comentario</label>
                 <div class="input-group">
-                  <input formControlName="comentario" class="form-control" type="text"
+                  <input formControlName="comentario" class="form-control" type="text" title="comentario"
                   [ngClass]="{'isDisabled': soloVista}">
                 </div>
               </div>
